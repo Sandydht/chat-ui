@@ -7,6 +7,7 @@ import {
   RegisterAccountRequest,
   RegisterAccountResponse
 } from "../models/auth-service.models";
+import axiosInstance from "../utils/axios-instance.utils";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -30,7 +31,7 @@ export const loginAccount = async (payload: LoginAccountRequest): Promise<LoginA
 
 export const logoutAccount = async (): Promise<LogoutAccountResponse> => {
   try {
-    const response = await axios.post<any, AxiosResponse>(`${baseURL}${AUTH_SERVICE_ENDPOINT.LOGOUT}`);
+    const response = await axiosInstance.post<any, AxiosResponse>(`${baseURL}${AUTH_SERVICE_ENDPOINT.LOGOUT}`);
     return response.data;
   } catch (error) {
     throw error;
