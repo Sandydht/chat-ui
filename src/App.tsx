@@ -5,12 +5,12 @@ import {
   Route
 } from "react-router-dom";
 import { PAGE } from './constants/page.constants';
-import Login from './pages/Login';
-import PrivateRoute from './components/PrivateRoute';
-import Home from './pages/Home';
-import { AuthProvider } from './context/AuthContext';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
+import Login from './pages/Login.pages';
+import PrivateRoute from './components/PrivateRoute.components';
+import Home from './pages/Home.pages';
+import Register from './pages/Register.pages';
+import ForgotPassword from './pages/ForgotPassword.pages';
+import { AuthProvider } from './contexts/AuthContext.contexts';
 
 const App = () => {
   return (

@@ -56,8 +56,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const response = await logoutAccount();
       if (response.status == 'OK') {
         clearItemFromLocalStorage();
-        history.push(PAGE.LOGIN);
+        history.replace(PAGE.LOGIN);
       }
+
       return response;
     } catch (error) {
       throw error;

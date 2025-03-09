@@ -4,7 +4,7 @@ import VisibleIcon from '../assets/images/svg/visibility_24px_outlined.svg'
 import UnvisibleIcon from '../assets/images/svg/visibility_off_24px_outlined.svg'
 import { Link } from "react-router-dom";
 import { PAGE } from "../constants/page.constants";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContext.contexts";
 
 interface FormDataSubmit {
   name: string;
@@ -136,7 +136,7 @@ const Register = () => {
             {isLoading && (
               <button
                 type="button"
-                className="w-full h-auto rounded-[6px] px-[20px] py-[10px] bg-[#508C9B] text-center text-[16px] leading-[24px] text-[#FFFFFF] font-medium cursor-not-allowed hover:bg-[#406c7a] outline-none focus:outline-none focus-within:outline-none"
+                className="w-full h-auto rounded-[6px] px-[20px] py-[10px] bg-[#508C9B] opacity-60 text-center text-[16px] leading-[24px] text-[#FFFFFF] font-medium cursor-not-allowed outline-none focus:outline-none focus-within:outline-none"
                 disabled
               >
                 Loading...

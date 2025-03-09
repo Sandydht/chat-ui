@@ -1,8 +1,8 @@
 import io from 'socket.io-client';
 import { Socket } from 'socket.io-client';
-import { SOCKET } from '../constants/socket.constants';
+import { SOCKET } from '../constants/socket-io.constants';
 
-const socketURL = 'http://localhost:3000';
+const socketURL = import.meta.env.VITE_BASE_URL;
 let socket = Socket;
 
 export const connectSocket = () => {
@@ -25,7 +25,7 @@ export const sendMessage = (message: string) => {
   }
 };
 
-export const listenForMessages = (callback: (message: string) => void) => {
+export const listenForMessages = (callback: (message: any) => void) => {
   if (socket) {
     socket.on(SOCKET.MESSAGE, callback);
   }
