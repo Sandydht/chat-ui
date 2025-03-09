@@ -19,6 +19,8 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
   const [moreOptionItems, setMoreOptionItems] = useState<MoreOptionItem[]>([]);
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
   const auth = useAuth();
+  const activeButtonClass = 'bg-[#EEEEEE]';
+  const inactiveButtonClass = 'bg-[#FFFFFF] hover:bg-[#EEEEEE]';
 
   useEffect(() => {
     setMoreOptionItems([
@@ -53,6 +55,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
   const handleClickOptionItem = (event: React.MouseEvent<HTMLButtonElement>, type: string): void => {
     event.preventDefault();
     props.handleClickMoreOptionButton(type);
+    setIsShowDropdown(false);
   };
 
   const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
@@ -60,6 +63,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
       event.preventDefault();
       setIsLoadingLogout(true);
       await auth.handleLogoutAccount();
+      setIsShowDropdown(false);
     } catch (error) {
       throw error;
     } finally {
@@ -78,7 +82,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
         <div className="w-auto h-auto flex items-center justify-center gap-[10px]">
           <button
             type="button"
-            className="w-full h-full min-w-[44px] max-w-[44px] min-h-[44px] max-h-[44px] flex items-center justify-center cursor-pointer rounded-full outline-none focus:outline-none focus-within:outline-none hover:bg-[#EEEEEE]"
+            className="w-full h-full min-w-[44px] max-w-[44px] min-h-[44px] max-h-[44px] flex items-center justify-center cursor-pointer rounded-full outline-none focus:outline-none focus-within:outline-none bg-[#FFFFFF] hover:bg-[#EEEEEE]"
             onClick={(event) => handleClickOptionItem(event, SIDE_BAR_TYPE.ADD_CHAT_ROOM)}
           >
             <img
@@ -91,7 +95,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
           <div ref={wrapperRef} className='w-auto h-auto relative'>
             <button
               type="button"
-              className="w-full h-full min-w-[44px] max-w-[44px] min-h-[44px] max-h-[44px] flex items-center justify-center cursor-pointer rounded-full outline-none focus:outline-none focus-within:outline-none hover:bg-[#EEEEEE]"
+              className={`w-full h-full min-w-[44px] max-w-[44px] min-h-[44px] max-h-[44px] flex items-center justify-center cursor-pointer rounded-full outline-none focus:outline-none focus-within:outline-none ${isShowDropdown ? activeButtonClass : inactiveButtonClass}`}
               onClick={toggleDropdown}
             >
               <img
@@ -107,7 +111,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
                   <button
                     key={moreOptionIndex}
                     type='button'
-                    className='w-full h-auto p-[10px] rounded-[6px] text-left text-[16px] leading-[24px] text-[#000000] font-medium whitespace-nowrap cursor-pointer hover:bg-[#EEEEEE]'
+                    className='w-full h-auto p-[10px] rounded-[6px] text-left text-[16px] leading-[24px] text-[#000000] font-medium whitespace-nowrap cursor-pointer bg-[#FFFFFF] hover:bg-[#EEEEEE]'
                     onClick={(event) => handleClickOptionItem(event, moreOptionItem.value)}
                   >
                     {moreOptionItem.labelText}
@@ -116,7 +120,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
 
                 <button
                   type='button'
-                  className='w-full h-auto p-[10px] rounded-[6px] text-left text-[16px] leading-[24px] text-[#000000] font-medium whitespace-nowrap cursor-pointer hover:bg-[#EEEEEE]'
+                  className='w-full h-auto p-[10px] rounded-[6px] text-left text-[16px] leading-[24px] text-[#000000] font-medium whitespace-nowrap cursor-pointer bg-[#FFFFFF] hover:bg-[#EEEEEE]'
                   disabled={isLoadingLogout}
                   onClick={handleLogout}
                 >

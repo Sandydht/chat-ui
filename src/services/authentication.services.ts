@@ -31,7 +31,7 @@ export const loginAccount = async (payload: LoginAccountRequest): Promise<LoginA
 
 export const logoutAccount = async (): Promise<LogoutAccountResponse> => {
   try {
-    const response = await axiosInstance.post<any, AxiosResponse>(`${baseURL}${AUTH_SERVICE_ENDPOINT.LOGOUT}`);
+    const response = await axiosInstance.post<any, AxiosResponse>(AUTH_SERVICE_ENDPOINT.LOGOUT);
     return response.data;
   } catch (error) {
     throw error;

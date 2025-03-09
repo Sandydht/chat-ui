@@ -1,0 +1,6 @@
+export const CHAT_ROOM_TYPE = {
+  ALL: 'ALL',
+  UNREAD: 'UNREAD',
+  FAVORITE: 'FAVORITE',
+  GROUPS: 'GROUPS'
+};

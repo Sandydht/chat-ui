@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constants';
+import { PAGE } from '../constants/page.constants';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const axiosInstance = axios.create({
@@ -29,11 +30,10 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Handle response error, e.g., handle authentication errors
     if (error.response && error.response.status === 401) {
-      console.log('Unauthorized! Redirecting to login...');
       // Redirect to login page, or clear localStorage and redirect
-      localStorage.removeItem('authToken');
+      localStorage.clear();
       // For example, redirect to login page
-      window.location.href = '/login';
+      window.location.replace(PAGE.LOGIN);
     }
     return Promise.reject(error);
   }
