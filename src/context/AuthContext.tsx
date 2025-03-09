@@ -1,27 +1,72 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { PAGE } from "../constants/page.constants";
+import {
+  LoginAccountRequest,
+  LoginAccountResponse,
+  LogoutAccountResponse,
+  RegisterAccountRequest,
+  RegisterAccountResponse
+} from "../models/auth-service.models";
+import { loginAccount, logoutAccount, registerAccount } from "../services/authentication.services";
+import { clearItemFromLocalStorage, setItemToLocalStorage } from "../services/local-storage.services";
+import { LOCAL_STORAGE_SERVICE } from "../constants/local-storage-service.constants";
 
 export interface AuthContextType {
-  isAuthenticated: boolean;
-  login: () => void;
-  logout: () => void;
+  handleRegisterAccount: (payload: RegisterAccountRequest) => Promise<RegisterAccountResponse>;
+  handleLoginAccount: (payload: LoginAccountRequest) => Promise<LoginAccountResponse>;
+  handleLogoutAccount: () => Promise<LogoutAccountResponse>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const history = useHistory();
 
-  const login = () => {
-    setIsAuthenticated(true);
+  const handleRegisterAccount = async (payload: RegisterAccountRequest): Promise<RegisterAccountResponse> => {
+    try {
+      const response = await registerAccount(payload);
+      if (response.status == 'OK' && response.access_token) {
+        setItemToLocalStorage(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN, response.access_token);
+        history.push(PAGE.HOME);
+      }
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
+  const handleLoginAccount = async (payload: LoginAccountRequest): Promise<LoginAccountResponse> => {
+    try {
+      const response = await loginAccount(payload);
+      if (response.status == 'OK' && response.access_token) {
+        setItemToLocalStorage(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN, response.access_token);
+        history.push(PAGE.HOME);
+      }
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleLogoutAccount = async (): Promise<LogoutAccountResponse> => {
+    try {
+      const response = await logoutAccount();
+      if (response.status == 'OK') {
+        clearItemFromLocalStorage();
+        history.push(PAGE.LOGIN);
+      }
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
     <>
-      <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+      <AuthContext.Provider value={{ handleRegisterAccount, handleLoginAccount, handleLogoutAccount }}>
         {children}
       </AuthContext.Provider>
     </>
