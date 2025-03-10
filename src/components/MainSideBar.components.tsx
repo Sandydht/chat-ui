@@ -36,8 +36,8 @@ const MainSideBar = (props: MainSideBarComponentProps) => {
 
   return (
     <>
-      <div className="w-full h-full flex flex-col items-start justify-start pt-[25px] gap-[25px]">
-        <div className='w-full h-auto px-[25px]'>
+      <div className='w-full h-full flex flex-col items-start justify-start'>
+        <div className='w-full h-auto px-[25px] py-[10px]'>
           <MainHeaderSideBar
             handleClickMoreOptionButton={props.handleClickMoreOptionButton}
           />
@@ -50,7 +50,7 @@ const MainSideBar = (props: MainSideBarComponentProps) => {
 
         {isEmpty && (
           <>
-            <div className='w-full h-full max-h-[calc(100vh-(75px+44px+96px))] overflow-hidden flex flex-col items-center justify-center p-[25px]'>
+            <div className='w-full h-full max-h-[calc(100vh-(64px+94px))] overflow-hidden flex flex-col items-center justify-center p-[25px]'>
               {renderEmptyState()}
             </div>
           </>
@@ -58,7 +58,7 @@ const MainSideBar = (props: MainSideBarComponentProps) => {
 
         {!isEmpty && (
           <>
-            <div className='w-full h-full max-h-[calc(100vh-(75px+44px+96px))] overflow-y-auto flex flex-col items-start justify-start'>
+            <div className='w-full h-full max-h-[calc(100vh-(64px+94px))] overflow-y-auto flex flex-col items-start justify-start'>
               <ChatRoomItem />
               <ChatRoomItem />
               <ChatRoomItem />

@@ -1,0 +1,6 @@
+export const NAVIGATION_TYPE = {
+  CHAT: 'CHAT',
+  EXPLORE: 'EXPLORE',
+  SETTING: 'SETTING',
+  PROFILE: 'PROFILE'
+};

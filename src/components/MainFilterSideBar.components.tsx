@@ -58,11 +58,12 @@ const MainFilterSideBar = (props: MainFilterSideBarComponentProps) => {
       <div className="w-full h-auto flex flex-col items-start justify-start gap-[10px]">
         <div className="w-full h-auto">
           <CustomSearchInput
-            chatType={selectedChatRoomFilter.value}
+            filterType={selectedChatRoomFilter.value}
             handleChangeSearchInput={handleChangeSearchInput}
           />
         </div>
-        <div className="w-full h-auto flex items-center justify-start gap-[10px] overflow-x-auto pb-3">
+
+        <div className="w-full h-auto flex items-center justify-start gap-[10px] overflow-x-auto pb-[10px]">
           {chatRoomFilterList.map((chatRoomFilterItem: ChatRoomFilterItem, chatRoomFilterIndex: number) => (
             <button
               key={chatRoomFilterIndex}
