@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
 import { useAuth } from "../contexts/AuthContext.contexts";
-import MessageIcon from '../assets/images/svg/message_24px_outlined.svg';
 import MoreVerticalIcon from '../assets/images/svg/more_vert_24px_outlined.svg';
+import PencilIcon from '../assets/images/svg/edit_24px.svg';
 
 interface MainHeaderSideBarComponentProps {
   handleClickMoreOptionButton: (type: string) => void;
@@ -86,7 +86,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
             onClick={(event) => handleClickOptionItem(event, SIDE_BAR_TYPE.ADD_CHAT_ROOM)}
           >
             <img
-              src={MessageIcon}
+              src={PencilIcon}
               alt='Message icon'
               loading='lazy'
               className='w-full h-full min-w-[24px] max-w-[24px] min-h-[24px] max-h-[24px] object-contain object-center'

@@ -2,9 +2,10 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import SearchIcon from '../assets/images/svg/search_24px_outlined.svg';
 import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constants';
 import useDebounce from '../hooks/debounce.hooks';
+import { CONTACT_TYPE } from '../constants/contact-type.constants';
 
 interface CustomSearchInputComponentProps {
-  chatType: string;
+  filterType?: string;
   handleChangeSearchInput: (value: string, chatRoomFilterType: string) => void;
 }
 
@@ -13,16 +14,18 @@ const CustomSearchInput = (props: CustomSearchInputComponentProps) => {
   const debouncedQuery = useDebounce(searchInputValue, 500);
 
   useEffect(() => {
-    props.handleChangeSearchInput(debouncedQuery, props.chatType);
+    props.handleChangeSearchInput(debouncedQuery, props.filterType || CHAT_ROOM_TYPE.ALL);
   }, [debouncedQuery]);
 
   const renderPlaceholder = () => {
-    if (props.chatType == CHAT_ROOM_TYPE.UNREAD) {
+    if (props.filterType == CHAT_ROOM_TYPE.UNREAD) {
       return 'Cari percakapan belum dibaca...';
-    } else if (props.chatType == CHAT_ROOM_TYPE.FAVORITE) {
+    } else if (props.filterType == CHAT_ROOM_TYPE.FAVORITE) {
       return 'Cari percakapan favorit...';
-    } else if (props.chatType == CHAT_ROOM_TYPE.GROUPS) {
+    } else if (props.filterType == CHAT_ROOM_TYPE.GROUPS) {
       return 'Cari percakapan grup...';
+    } else if (props.filterType == CONTACT_TYPE.ALL) {
+      return 'Cari nomor HP...';
     } else {
       return 'Cari percakapan...'
     }
