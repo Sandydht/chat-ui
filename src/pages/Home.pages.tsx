@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
 import MainSideBar from "../components/MainSideBar.components";
 import AddChatRoomSideBar from "../components/AddChatRoomSideBar.components";
 import AddGroupSideBar from "../components/AddGroupSideBar.components";
 import SelectChatRoomSideBar from "../components/SelectChatRoomSideBar.components";
-import { connectSocket, disconnectSocket, listenForMessages, sendMessage } from "../services/socket-io.services";
+import { connectSocket, disconnectSocket, listenForMessages } from "../services/socket-io.services";
 import ContainerEmptyState from "../components/ContainerEmptyState.components";
 import ChatRoomContainer from "../components/ChatRoomContainer.components";
+import { getUserProfile } from "../services/user.services";
+import { UserDataProfile } from "../models/user-service.models";
 
 const Home = () => {
+  const [userProfileData, setUserProfileData] = useState<UserDataProfile | null>(null);
   const [sideBarType, setSideBarType] = useState<string>(SIDE_BAR_TYPE.MAIN);
-  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const [isEmpty] = useState<boolean>(true);
+
+  useEffect(() => {
+    handleGetUserProfile();
+  }, []);
 
   useEffect(() => {
     connectSocket();
@@ -21,6 +28,17 @@ const Home = () => {
 
     return () => disconnectSocket();
   }, []);
+
+  const handleGetUserProfile = async () => {
+    try {
+      const response = await getUserProfile();
+      if (response.status == 'OK' && response.data) {
+        setUserProfileData(response.data);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const handleChangeSideBarType = (type: string) => {
     setSideBarType(type);
@@ -54,11 +72,6 @@ const Home = () => {
         </>
       );
     }
-  };
-
-  const handleSendMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    sendMessage('test');
   };
 
   return (

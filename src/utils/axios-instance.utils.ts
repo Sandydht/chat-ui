@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constants';
 import { PAGE } from '../constants/page.constants';
+import { getItemFromLocalStorage } from '../services/local-storage.services';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const axiosInstance = axios.create({
@@ -9,15 +10,13 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Modify request configuration if needed (e.g., add token to headers)
-    const token = localStorage.getItem(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN);
+    const token = getItemFromLocalStorage(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN);
     if (token) {
-      config.headers['Authorization'] = token;
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
-    // Handle request error
     return Promise.reject(error);
   }
 );

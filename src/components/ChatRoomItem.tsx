@@ -15,7 +15,7 @@ const ChatRoomItem = () => {
             className='w-full h-full min-w-[24px] max-w-[24px] min-h-[24px] max-h-[24px]'
           />
         </div>
-        <div className='w-full h-auto py-[10px] border-y-[1px] border-[#D9D9D9] flex flex-col items-start justify-start pr-[25px]'>
+        <div className='w-full h-auto py-[10px] border-b-[1px] border-[#D9D9D9] flex flex-col items-start justify-start pr-[25px]'>
           <div className='w-full h-auto flex items-center justify-between gap-[10px]'>
             <p className='text-left text-[16px] leading-[24px] text-[#000000] font-medium'>
               Sergio de Paula

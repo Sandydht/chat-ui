@@ -1,12 +1,21 @@
 import io from 'socket.io-client';
 import { Socket } from 'socket.io-client';
 import { SOCKET } from '../constants/socket-io.constants';
+import { getItemFromLocalStorage } from './local-storage.services';
+import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constants';
 
 const socketURL = import.meta.env.VITE_BASE_URL;
 let socket = Socket;
 
 export const connectSocket = () => {
-  socket = io(socketURL);
+  const accessToken = getItemFromLocalStorage(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN);
+
+  socket = io(socketURL, {
+    query: {
+      token: accessToken
+    }
+  });
+
   socket.on(SOCKET.CONNECT, () => {
     console.log('Connected to socket server');
   });
