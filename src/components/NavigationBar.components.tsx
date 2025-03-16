@@ -1,10 +1,12 @@
-import NavigationItem from "./NavigationItem";
+import NavigationItem from "./NavigationItem.components";
 import MessageIcon from '../assets/images/svg/message_24px_outlined.svg';
 import ExploreIcon from '../assets/images/svg/explore_24px.svg';
 import SettingIcon from '../assets/images/svg/settings_24px.svg';
 import ProfileIcon from '../assets/images/svg/perm_identity_24px.svg';
 import { useEffect, useState } from "react";
 import { NAVIGATION_TYPE } from "../constants/navigation-type.constants";
+import { useDispatch } from "react-redux";
+import { resetSelectedSidebar, selectNavigation } from "../store/navigationSlice";
 
 export interface NavigationItemData {
   icon: string;
@@ -12,18 +14,10 @@ export interface NavigationItemData {
   value: string;
 }
 
-interface NavigationBarComponentProps {
-  onSelectNavigation: (navigationItem: NavigationItemData) => void;
-}
-
-const NavigationBar = (props: NavigationBarComponentProps) => {
+const NavigationBar = () => {
   const [navigationList, setNavigationList] = useState<NavigationItemData[]>([]);
   const [additionalNavigationList, setAdditionalNavigationList] = useState<NavigationItemData[]>([]);
-  const [selectedNavigation, setSelectedNavigation] = useState<NavigationItemData>({
-    icon: MessageIcon,
-    labelText: 'Percakapan',
-    value: NAVIGATION_TYPE.CHAT
-  });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setNavigationList([
@@ -54,8 +48,8 @@ const NavigationBar = (props: NavigationBarComponentProps) => {
   }, []);
 
   const handleSelectNavigationItem = (navigationItem: NavigationItemData) => {
-    setSelectedNavigation(navigationItem);
-    props.onSelectNavigation(navigationItem);
+    dispatch(resetSelectedSidebar());
+    dispatch(selectNavigation(navigationItem));
   };
 
   return (
@@ -66,7 +60,7 @@ const NavigationBar = (props: NavigationBarComponentProps) => {
             <NavigationItem
               key={navigationIndex}
               icon={navigationItem.icon}
-              isActive={Boolean(selectedNavigation.value == navigationItem.value)}
+              isActive={false}
               labelText={navigationItem.labelText}
               value={navigationItem.value}
               handleSelectNavigationItem={() => handleSelectNavigationItem(navigationItem)}
@@ -78,7 +72,7 @@ const NavigationBar = (props: NavigationBarComponentProps) => {
             <NavigationItem
               key={navigationIndex}
               icon={navigationItem.icon}
-              isActive={Boolean(selectedNavigation.value == navigationItem.value)}
+              isActive={false}
               labelText={navigationItem.labelText}
               value={navigationItem.value}
               handleSelectNavigationItem={() => handleSelectNavigationItem(navigationItem)}

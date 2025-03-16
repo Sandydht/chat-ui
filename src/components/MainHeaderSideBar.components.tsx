@@ -3,17 +3,15 @@ import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
 import { useAuth } from "../contexts/AuthContext.contexts";
 import MoreVerticalIcon from '../assets/images/svg/more_vert_24px_outlined.svg';
 import PencilIcon from '../assets/images/svg/edit_24px.svg';
-
-interface MainHeaderSideBarComponentProps {
-  handleClickMoreOptionButton: (type: string) => void;
-}
+import { useDispatch } from "react-redux";
+import { resetSelectedNavigation, selectSidebar } from "../store/navigationSlice";
 
 interface MoreOptionItem {
   labelText: string;
   value: string;
 }
 
-const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
+const MainHeaderSideBar = () => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [isLoadingLogout, setIsLoadingLogout] = useState<boolean>(false);
   const [moreOptionItems, setMoreOptionItems] = useState<MoreOptionItem[]>([]);
@@ -21,6 +19,7 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
   const auth = useAuth();
   const activeButtonClass = 'bg-[#EEEEEE]';
   const inactiveButtonClass = 'bg-[#FFFFFF] hover:bg-[#EEEEEE]';
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setMoreOptionItems([
@@ -54,7 +53,8 @@ const MainHeaderSideBar = (props: MainHeaderSideBarComponentProps) => {
 
   const handleClickOptionItem = (event: React.MouseEvent<HTMLButtonElement>, type: string): void => {
     event.preventDefault();
-    props.handleClickMoreOptionButton(type);
+    dispatch(resetSelectedNavigation());
+    dispatch(selectSidebar(type));
     setIsShowDropdown(false);
   };
 

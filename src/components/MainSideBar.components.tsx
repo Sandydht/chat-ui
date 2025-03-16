@@ -3,14 +3,10 @@ import MainFilterSideBar from './MainFilterSideBar.components';
 import MainHeaderSideBar from './MainHeaderSideBar.components';
 import SideBarEmptyState from './SideBarEmptyState.components';
 import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constants';
-import AddFavoriteChatRoomEmptyState from './AddFavoriteChatRoomEmptyState';
-import ChatRoomItem from './ChatRoomItem';
+import AddFavoriteChatRoomEmptyState from './AddFavoriteChatRoomEmptyState.components';
+import ChatRoomItem from './ChatRoomItem.components';
 
-interface MainSideBarComponentProps {
-  handleClickMoreOptionButton: (type: string) => void;
-}
-
-const MainSideBar = (props: MainSideBarComponentProps) => {
+const MainSideBar = () => {
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [selectedChatRoomFilter, setSelectedChatRoomFilter] = useState<string>(CHAT_ROOM_TYPE.ALL);
 
@@ -38,9 +34,7 @@ const MainSideBar = (props: MainSideBarComponentProps) => {
     <>
       <div className='w-full h-full flex flex-col items-start justify-start'>
         <div className='w-full h-auto px-[25px] py-[10px]'>
-          <MainHeaderSideBar
-            handleClickMoreOptionButton={props.handleClickMoreOptionButton}
-          />
+          <MainHeaderSideBar />
         </div>
         <div className='w-full h-auto px-[25px]'>
           <MainFilterSideBar
@@ -59,36 +53,6 @@ const MainSideBar = (props: MainSideBarComponentProps) => {
         {!isEmpty && (
           <>
             <div className='w-full h-full max-h-[calc(100vh-(64px+94px))] overflow-y-auto flex flex-col items-start justify-start'>
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
-              <ChatRoomItem />
               <ChatRoomItem />
             </div>
           </>

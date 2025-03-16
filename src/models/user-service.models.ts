@@ -8,5 +8,10 @@ export interface UserDataProfile {
   photo_url: string;
   name: string;
   phone_number: string;
-  data_status: string;
+  data_status?: string;
+}
+
+export interface GetUsersResponse {
+  status: string;
+  data: UserDataProfile[];
 }
