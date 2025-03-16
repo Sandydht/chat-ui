@@ -10,30 +10,27 @@ import PrivateRoute from './components/PrivateRoute.components';
 import Home from './pages/Home.pages';
 import Register from './pages/Register.pages';
 import ForgotPassword from './pages/ForgotPassword.pages';
-import { AuthProvider } from './contexts/AuthContext.contexts';
 
 const App = () => {
   return (
     <Router>
-      <AuthProvider>
-        <Switch>
-          {/* Public Route */}
-          <Route path={PAGE.LOGIN}>
-            <Login />
-          </Route>
-          <Route path={PAGE.REGISTER}>
-            <Register />
-          </Route>
-          <Route path={PAGE.FORGOT_PASSWORD}>
-            <ForgotPassword />
-          </Route>
+      <Switch>
+        {/* Public Route */}
+        <Route path={PAGE.LOGIN}>
+          <Login />
+        </Route>
+        <Route path={PAGE.REGISTER}>
+          <Register />
+        </Route>
+        <Route path={PAGE.FORGOT_PASSWORD}>
+          <ForgotPassword />
+        </Route>
 
-          {/* Private Route */}
-          <PrivateRoute path={PAGE.HOME}>
-            <Home />
-          </PrivateRoute>
-        </Switch>
-      </AuthProvider>
+        {/* Private Route */}
+        <PrivateRoute path={PAGE.HOME}>
+          <Home />
+        </PrivateRoute>
+      </Switch>
     </Router>
   )
 }

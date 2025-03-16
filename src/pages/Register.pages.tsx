@@ -2,9 +2,11 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import LoginPageImage from '../assets/images/svg/undraw_online-messaging_gjnh.svg'
 import VisibleIcon from '../assets/images/svg/visibility_24px_outlined.svg'
 import UnvisibleIcon from '../assets/images/svg/visibility_off_24px_outlined.svg'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { PAGE } from "../constants/page.constants";
-import { useAuth } from "../contexts/AuthContext.contexts";
+import { registerAccount } from "../services/authentication.services";
+import { setItemToLocalStorage } from "../services/local-storage.services";
+import { LOCAL_STORAGE_SERVICE } from "../constants/local-storage-service.constants";
 
 interface FormDataSubmit {
   name: string;
@@ -20,7 +22,7 @@ const Register = () => {
     phone_number: '',
     password: ''
   });
-  const auth = useAuth();
+  const history = useHistory();
 
   const toggleVisibilityPassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -30,13 +32,15 @@ const Register = () => {
     try {
       event.preventDefault();
       setIsLoading(true);
-      const response = await auth.handleRegisterAccount(formData);
+      const response = await registerAccount(formData);
       if (response.status == 'OK' && response.access_token) {
+        setItemToLocalStorage(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN, response.access_token);
         setFormData({
           name: '',
           phone_number: '',
           password: ''
         });
+        history.push(PAGE.HOME);
       }
     } catch (error) {
       throw error;
@@ -47,7 +51,6 @@ const Register = () => {
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,

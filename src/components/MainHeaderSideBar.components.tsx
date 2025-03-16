@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
-import { useAuth } from "../contexts/AuthContext.contexts";
 import MoreVerticalIcon from '../assets/images/svg/more_vert_24px_outlined.svg';
 import PencilIcon from '../assets/images/svg/edit_24px.svg';
 import { useDispatch } from "react-redux";
 import { resetSelectedNavigation, selectSidebar } from "../store/navigationSlice";
+import { logoutAccount } from "../services/authentication.services";
+import { clearItemFromLocalStorage } from "../services/local-storage.services";
+import { useHistory } from "react-router-dom";
+import { PAGE } from "../constants/page.constants";
 
 interface MoreOptionItem {
   labelText: string;
@@ -16,10 +19,10 @@ const MainHeaderSideBar = () => {
   const [isLoadingLogout, setIsLoadingLogout] = useState<boolean>(false);
   const [moreOptionItems, setMoreOptionItems] = useState<MoreOptionItem[]>([]);
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
-  const auth = useAuth();
   const activeButtonClass = 'bg-[#EEEEEE]';
   const inactiveButtonClass = 'bg-[#FFFFFF] hover:bg-[#EEEEEE]';
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     setMoreOptionItems([
@@ -62,8 +65,12 @@ const MainHeaderSideBar = () => {
     try {
       event.preventDefault();
       setIsLoadingLogout(true);
-      await auth.handleLogoutAccount();
-      setIsShowDropdown(false);
+      const response = await logoutAccount();
+      if (response.status == 'OK') {
+        clearItemFromLocalStorage();
+        setIsShowDropdown(false);
+        history.replace(PAGE.LOGIN);
+      }
     } catch (error) {
       throw error;
     } finally {

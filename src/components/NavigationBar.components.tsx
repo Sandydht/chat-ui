@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { NAVIGATION_TYPE } from "../constants/navigation-type.constants";
 import { useDispatch } from "react-redux";
 import { resetSelectedSidebar, selectNavigation } from "../store/navigationSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 export interface NavigationItemData {
   icon: string;
@@ -18,6 +20,7 @@ const NavigationBar = () => {
   const [navigationList, setNavigationList] = useState<NavigationItemData[]>([]);
   const [additionalNavigationList, setAdditionalNavigationList] = useState<NavigationItemData[]>([]);
   const dispatch = useDispatch();
+  const selectedNavigation = useSelector((state: RootState) => state.navigation.selectedNavigation);
 
   useEffect(() => {
     setNavigationList([
@@ -47,7 +50,7 @@ const NavigationBar = () => {
     ]);
   }, []);
 
-  const handleSelectNavigationItem = (navigationItem: NavigationItemData) => {
+  const handleSelectNavigationItem = (navigationItem: string) => {
     dispatch(resetSelectedSidebar());
     dispatch(selectNavigation(navigationItem));
   };
@@ -60,10 +63,10 @@ const NavigationBar = () => {
             <NavigationItem
               key={navigationIndex}
               icon={navigationItem.icon}
-              isActive={false}
+              isActive={Boolean(navigationItem.value == selectedNavigation)}
               labelText={navigationItem.labelText}
               value={navigationItem.value}
-              handleSelectNavigationItem={() => handleSelectNavigationItem(navigationItem)}
+              handleSelectNavigationItem={() => handleSelectNavigationItem(navigationItem.value)}
             />
           ))}
         </div>
@@ -72,10 +75,10 @@ const NavigationBar = () => {
             <NavigationItem
               key={navigationIndex}
               icon={navigationItem.icon}
-              isActive={false}
+              isActive={Boolean(navigationItem.value == selectedNavigation)}
               labelText={navigationItem.labelText}
               value={navigationItem.value}
-              handleSelectNavigationItem={() => handleSelectNavigationItem(navigationItem)}
+              handleSelectNavigationItem={() => handleSelectNavigationItem(navigationItem.value)}
             />
           ))}
         </div>

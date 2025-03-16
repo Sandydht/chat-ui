@@ -18,9 +18,9 @@ const Home = () => {
   const [isEmpty] = useState<boolean>(true);
 
   const navigationBar = () => {
-    if (selectedNavigationType.value == NAVIGATION_TYPE.CHAT) {
+    if (selectedNavigationType == NAVIGATION_TYPE.CHAT) {
       return renderSideBarChatType();
-    } else if (selectedNavigationType.value == NAVIGATION_TYPE.EXPLORE) {
+    } else if (selectedNavigationType == NAVIGATION_TYPE.EXPLORE) {
       return renderSideBarExploreType();
     }
   };
