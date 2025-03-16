@@ -7,6 +7,9 @@ import { PAGE } from '../constants/page.constants'
 import { loginAccount } from '../services/authentication.services'
 import { setItemToLocalStorage } from '../services/local-storage.services'
 import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constants'
+import { useDispatch } from 'react-redux'
+import { showSnackbar } from '../store/snackbarSlice'
+import { SNACKBAR_TYPE } from '../constants/snackbar-type.constants'
 
 interface FormDataSubmit {
   phone_number: string;
@@ -21,6 +24,7 @@ const Login = () => {
     password: ''
   });
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const toggleVisibilityPassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -40,7 +44,11 @@ const Login = () => {
         history.push(PAGE.HOME);
       }
     } catch (error) {
-      throw error;
+      dispatch(showSnackbar({
+        show: true,
+        type: SNACKBAR_TYPE.DANGER,
+        message: String(error)
+      }));
     } finally {
       setIsLoading(false);
     }

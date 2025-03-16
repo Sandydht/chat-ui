@@ -1,0 +1,6 @@
+export const SNACKBAR_TYPE = {
+  SUCCESS: 'SUCCESS',
+  DANGER: 'DANGER',
+  WARNING: 'WARNING',
+  INFO: 'INFO'
+}
