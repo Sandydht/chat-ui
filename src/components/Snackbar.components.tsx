@@ -13,7 +13,7 @@ const Snackbar = (props: SnackbarComponentProps) => {
   if (props.type == SNACKBAR_TYPE.SUCCESS) {
     return (
       <>
-        <div className="w-full h-auto fixed top-0 left-0 right-0 flex items-center justify-center px-[25px] py-[10px]">
+        <div className="w-full h-auto fixed top-0 left-0 right-0 flex items-center justify-center px-[25px] py-[10px] z-[9999999999]">
           <div className="w-auto h-auto max-w-[300px] px-[10px] py-[5px] rounded-full bg-[#dcfcdf] border-[1px] border-[#17a226] flex items-center justify-start gap-[10px] overflow-hidden">
             <div className="w-full h-full min-w-[16px] max-w-[16px] min-h-[16px] max-h-[16px]">
               <img

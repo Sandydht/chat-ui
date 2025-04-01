@@ -3,9 +3,10 @@ import ExploreFilterSideBar from "./ExploreFilterSideBar.components";
 import ExploreHeaderSideBar from "./ExploreHeaderSideBar.components";
 import { getUsers } from "../services/user.services";
 import ContactItem from "./ContactItem.components";
+import { UserDataList } from "../models/user-service.models";
 
 const ExploreSideBar = () => {
-  const [userList, setUserList] = useState<any[]>([]);
+  const [userList, setUserList] = useState<UserDataList[]>([]);
 
   useEffect(() => {
     handleGetUsers();
@@ -14,7 +15,7 @@ const ExploreSideBar = () => {
   const handleGetUsers = async () => {
     try {
       const response = await getUsers();
-      if (response.status == 'OK') {
+      if (response.status == 'OK' && response.data.length > 0) {
         setUserList(response.data);
       }
     } catch (error) {
@@ -32,14 +33,11 @@ const ExploreSideBar = () => {
           <ExploreFilterSideBar />
         </div>
         <div className="w-full h-auto flex flex-col items-start justify-start min-h-[calc(100vh-(54px+64px+50px))] max-h-[calc(100vh-(54px+64px+50px))] overflow-y-auto">
-          {userList.map((userItem, userIndex) => (
-            <>
-              <ContactItem 
-                key={userIndex}
-                name={userItem.name}
-                description='test'
-              />
-            </>
+          {userList.map((userItem: UserDataList) => (
+            <ContactItem
+              key={userItem._id}
+              userData={userItem}
+            />
           ))}
         </div>
       </div>

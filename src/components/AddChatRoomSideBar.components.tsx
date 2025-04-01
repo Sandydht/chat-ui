@@ -24,10 +24,10 @@ const AddChatRoomSideBar = () => {
           />
         </div>
         <div className="w-full h-full min-h-[calc(100vh-(64px+54px+50px))] max-h-[calc(100vh-(64px+54px+50px))] overflow-y-auto flex flex-col items-start justify-start">
-          <ContactItem 
+          {/* <ContactItem 
             name="A. C."
             description="Hey there! I am using WhatsApp."
-          />
+          /> */}
         </div>
       </div>
     </>

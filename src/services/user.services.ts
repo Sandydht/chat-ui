@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { GetUserProfileResponse, GetUsersResponse } from "../models/user-service.models";
+import { GetUserProfileResponse, GetUsersResponse, SaveContactRequest, SaveContactResponse } from "../models/user-service.models";
 import axiosInstance from "../utils/axios-instance.utils";
 import { USER_SERVICE_ENDPOINT } from "../constants/user-service-endpoint.constants";
 import handleAxiosError from "../utils/error-handler.utils";
@@ -23,3 +23,12 @@ export const getUsers = async (): Promise<GetUsersResponse> => {
     throw handleAxiosError(error);
   }
 };
+
+export const saveContact = async (payload: SaveContactRequest): Promise<SaveContactResponse> => {
+  try {
+    const response = await axiosInstance.post<SaveContactRequest, AxiosResponse>(`${baseURL}${USER_SERVICE_ENDPOINT.SAVE_CONTACT}`, payload);
+    return response.data;
+  } catch (error) {
+    throw handleAxiosError(error);
+  }
+}

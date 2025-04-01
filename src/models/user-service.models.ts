@@ -4,14 +4,34 @@ export interface GetUserProfileResponse {
 }
 
 export interface UserDataProfile {
-  _id: string;
-  photo_url: string;
-  name: string;
-  phone_number: string;
-  data_status?: string;
+  _id: string | null;
+  photo_url: string | null;
+  name: string | null;
+  phone_number: string | null;
+  data_status?: string | null;
+  description?: string | null;
 }
 
 export interface GetUsersResponse {
   status: string;
-  data: UserDataProfile[];
+  data: UserDataList[];
+}
+
+export interface UserDataList {
+  _id: string | null;
+  photo_url: string | null;
+  name: string | null;
+  phone_number: string | null;
+  data_status: string | null;
+  description: string | null;
+  is_contact: boolean;
+}
+
+export interface SaveContactRequest {
+  member_id: string;
+}
+
+export interface SaveContactResponse {
+  status: string;
+  message: string;
 }
