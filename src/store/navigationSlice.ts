@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { NAVIGATION_TYPE } from "../constants/navigation-type.constants";
-import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
+import { NAVIGATION_TYPE } from "../constants/navigation-type.constant";
+import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constant";
 
 interface NavigationState {
   selectedNavigation: string;

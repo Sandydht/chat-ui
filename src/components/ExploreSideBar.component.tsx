@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ExploreFilterSideBar from "./ExploreFilterSideBar.components";
-import ExploreHeaderSideBar from "./ExploreHeaderSideBar.components";
-import { getUsers } from "../services/user.services";
-import ContactItem from "./ContactItem.components";
-import { UserDataList } from "../models/user-service.models";
+import ExploreFilterSideBar from "./ExploreFilterSideBar.component";
+import ExploreHeaderSideBar from "./ExploreHeaderSideBar.component";
+import { getUsers } from "../services/user.service";
+import ContactItem from "./ContactItem.component";
+import { UserDataList } from "../models/user-service.model";
 
 const ExploreSideBar = () => {
   const [userList, setUserList] = useState<UserDataList[]>([]);

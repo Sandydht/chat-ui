@@ -4,18 +4,19 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { PAGE } from './constants/page.constants';
-import Login from './pages/Login.pages';
-import PrivateRoute from './components/PrivateRoute.components';
-import Home from './pages/Home.pages';
-import Register from './pages/Register.pages';
-import ForgotPassword from './pages/ForgotPassword.pages';
-import Snackbar from './components/Snackbar.components';
+import { PAGE } from './constants/page.constant';
+import Login from './pages/Login.page';
+import PrivateRoute from './components/PrivateRoute.component';
+import Home from './pages/Home.page';
+import Register from './pages/Register.page';
+import ForgotPassword from './pages/ForgotPassword.page';
+import Snackbar from './components/Snackbar.component';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { closeSnackbar } from './store/snackbarSlice';
+import { connectSocket } from './services/socket-io.service';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ const App = () => {
 
     return () => clearTimeout(setTimeoutID);
   }, [snackbarState.show])
+
+  useEffect(() => {
+    connectSocket();
+  }, [])
 
   return (
     <>

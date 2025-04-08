@@ -1,4 +1,4 @@
-import { SNACKBAR_TYPE } from "../constants/snackbar-type.constants";
+import { SNACKBAR_TYPE } from "../constants/snackbar-type.constant";
 import DoneIcon from '../assets/images/svg/done_24px_outlined_green.svg';
 import ErrorRedIcon from '../assets/images/svg/error_outline_24px_red.svg';
 import WarningIcon from '../assets/images/svg/warning_amber_24px_outlined_yellow.svg';

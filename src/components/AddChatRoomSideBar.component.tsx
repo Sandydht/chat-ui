@@ -1,8 +1,8 @@
 import { useState } from "react";
-import AddChatRoomSideBarHeader from "./AddChatRoomSideBarHeader.components";
-import CustomSearchInput from "./CustomSearchInput.components";
-import { CONTACT_TYPE } from "../constants/contact-type.constants";
-import ContactItem from "./ContactItem.components";
+import AddChatRoomSideBarHeader from "./AddChatRoomSideBarHeader.component";
+import CustomSearchInput from "./CustomSearchInput.component";
+import { CONTACT_TYPE } from "../constants/contact-type.constant";
+import ContactItem from "./ContactItem.component";
 
 const AddChatRoomSideBar = () => {
   const [searchInput, setSearchInput] = useState<string>('');

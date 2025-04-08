@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import SearchIcon from '../assets/images/svg/search_24px_outlined.svg';
-import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constants';
-import useDebounce from '../hooks/debounce.hooks';
-import { CONTACT_TYPE } from '../constants/contact-type.constants';
+import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constant';
+import useDebounce from '../hooks/debounce.hook';
+import { CONTACT_TYPE } from '../constants/contact-type.constant';
 
 interface CustomSearchInputComponentProps {
   filterType?: string;

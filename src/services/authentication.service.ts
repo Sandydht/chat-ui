@@ -1,14 +1,14 @@
 import axios, { AxiosResponse } from "axios";
-import { AUTH_SERVICE_ENDPOINT } from "../constants/auth-service-endpoint.constants";
+import { AUTH_SERVICE_ENDPOINT } from "../constants/auth-service-endpoint.constant";
 import {
   LoginAccountRequest,
   LoginAccountResponse,
   LogoutAccountResponse,
   RegisterAccountRequest,
   RegisterAccountResponse
-} from "../models/auth-service.models";
-import axiosInstance from "../utils/axios-instance.utils";
-import handleAxiosError from "../utils/error-handler.utils";
+} from "../models/auth-service.model";
+import axiosInstance from "../utils/axios-instance.util";
+import handleAxiosError from "../utils/error-handler.util";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 

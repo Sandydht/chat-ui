@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { SNACKBAR_TYPE } from "../constants/snackbar-type.constants";
+import { SNACKBAR_TYPE } from "../constants/snackbar-type.constant";
 
 interface SnackbarState {
   show: boolean;

@@ -1,6 +1,6 @@
-import ChatRoomContainerBody from "./ChatRoomContainerBody.components";
-import ChatRoomContainerFormInputMessage from "./ChatRoomContainerFormInputMessage.components";
-import ChatRoomContainerHeader from "./ChatRoomContainerHeader.components";
+import ChatRoomContainerBody from "./ChatRoomContainerBody.component";
+import ChatRoomContainerFormInputMessage from "./ChatRoomContainerFormInputMessage.component";
+import ChatRoomContainerHeader from "./ChatRoomContainerHeader.component";
 
 const ChatRoomContainer = () => {
   return (

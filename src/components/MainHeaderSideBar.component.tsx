@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
+import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constant";
 import MoreVerticalIcon from '../assets/images/svg/more_vert_24px_outlined.svg';
 import PencilIcon from '../assets/images/svg/edit_24px.svg';
 import { useDispatch } from "react-redux";
 import { resetSelectedNavigation, selectSidebar } from "../store/navigationSlice";
-import { logoutAccount } from "../services/authentication.services";
-import { clearItemFromLocalStorage } from "../services/local-storage.services";
+import { logoutAccount } from "../services/authentication.service";
+import { clearItemFromLocalStorage } from "../services/local-storage.service";
 import { useHistory } from "react-router-dom";
-import { PAGE } from "../constants/page.constants";
+import { PAGE } from "../constants/page.constant";
 
 interface MoreOptionItem {
   labelText: string;

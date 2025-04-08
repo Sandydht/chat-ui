@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import MainFilterSideBar from './MainFilterSideBar.components';
-import MainHeaderSideBar from './MainHeaderSideBar.components';
-import SideBarEmptyState from './SideBarEmptyState.components';
-import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constants';
-import AddFavoriteChatRoomEmptyState from './AddFavoriteChatRoomEmptyState.components';
-import ChatRoomItem from './ChatRoomItem.components';
+import MainFilterSideBar from './MainFilterSideBar.component';
+import MainHeaderSideBar from './MainHeaderSideBar.component';
+import SideBarEmptyState from './SideBarEmptyState.component';
+import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constant';
+import AddFavoriteChatRoomEmptyState from './AddFavoriteChatRoomEmptyState.component';
+import ChatRoomItem from './ChatRoomItem.component';
 
 const MainSideBar = () => {
   const [isEmpty, setIsEmpty] = useState<boolean>(false);

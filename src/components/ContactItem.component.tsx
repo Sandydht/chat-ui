@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import PersonIcon from '../assets/images/svg/perm_identity_24px.svg';
-import { SaveContactRequest, UserDataList } from '../models/user-service.models';
-import { saveContact } from '../services/user.services';
+import { SaveContactRequest, UserDataList } from '../models/user-service.model';
+import { saveContact } from '../services/user.service';
 import { useDispatch } from 'react-redux';
 import { showSnackbar } from '../store/snackbarSlice';
-import { SNACKBAR_TYPE } from '../constants/snackbar-type.constants';
+import { SNACKBAR_TYPE } from '../constants/snackbar-type.constant';
 
 interface ContactItemComponentProps {
   userData: UserDataList;

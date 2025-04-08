@@ -1,8 +1,8 @@
 import { AxiosResponse } from "axios";
-import { GetUserProfileResponse, GetUsersResponse, SaveContactRequest, SaveContactResponse } from "../models/user-service.models";
-import axiosInstance from "../utils/axios-instance.utils";
-import { USER_SERVICE_ENDPOINT } from "../constants/user-service-endpoint.constants";
-import handleAxiosError from "../utils/error-handler.utils";
+import { GetUserProfileResponse, GetUsersResponse, SaveContactRequest, SaveContactResponse } from "../models/user-service.model";
+import axiosInstance from "../utils/axios-instance.util";
+import { USER_SERVICE_ENDPOINT } from "../constants/user-service-endpoint.constant";
+import handleAxiosError from "../utils/error-handler.util";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 

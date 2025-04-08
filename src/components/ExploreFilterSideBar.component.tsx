@@ -1,4 +1,4 @@
-import CustomSearchInput from "./CustomSearchInput.components";
+import CustomSearchInput from "./CustomSearchInput.component";
 
 const ExploreFilterSideBar = () => {
   const handleChangeSearchInput = (value: string, chatRoomFilterType: string) => {

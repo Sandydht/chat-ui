@@ -1,8 +1,8 @@
 import io from 'socket.io-client';
 import { Socket } from 'socket.io-client';
-import { SOCKET } from '../constants/socket-io.constants';
-import { getItemFromLocalStorage } from './local-storage.services';
-import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constants';
+import { SOCKET } from '../constants/socket-io.constant';
+import { getItemFromLocalStorage } from './local-storage.service';
+import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constant';
 
 const socketURL = import.meta.env.VITE_BASE_URL;
 let socket = Socket;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ButtonTooltip from "./ButtonTooltip.components";
+import ButtonTooltip from "./ButtonTooltip.component";
 
 interface NavigationItemComponentProps {
   icon: string;

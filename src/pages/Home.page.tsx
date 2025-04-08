@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constants";
-import MainSideBar from "../components/MainSideBar.components";
-import AddChatRoomSideBar from "../components/AddChatRoomSideBar.components";
-import AddGroupSideBar from "../components/AddGroupSideBar.components";
-import SelectChatRoomSideBar from "../components/SelectChatRoomSideBar.components";
-import ContainerEmptyState from "../components/ContainerEmptyState.components";
-import ChatRoomContainer from "../components/ChatRoomContainer.components";
-import NavigationBar from "../components/NavigationBar.components";
-import { NAVIGATION_TYPE } from "../constants/navigation-type.constants";
-import ExploreSideBar from "../components/ExploreSideBar.components";
+import { SIDE_BAR_TYPE } from "../constants/side-bar-type.constant";
+import MainSideBar from "../components/MainSideBar.component";
+import AddChatRoomSideBar from "../components/AddChatRoomSideBar.component";
+import AddGroupSideBar from "../components/AddGroupSideBar.component";
+import SelectChatRoomSideBar from "../components/SelectChatRoomSideBar.component";
+import ContainerEmptyState from "../components/ContainerEmptyState.component";
+import ChatRoomContainer from "../components/ChatRoomContainer.component";
+import NavigationBar from "../components/NavigationBar.component";
+import { NAVIGATION_TYPE } from "../constants/navigation-type.constant";
+import ExploreSideBar from "../components/ExploreSideBar.component";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
