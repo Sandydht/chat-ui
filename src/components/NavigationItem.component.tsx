@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ButtonTooltip from "./ButtonTooltip";
+import ButtonTooltip from "./ButtonTooltip.component";
 
 interface NavigationItemComponentProps {
   icon: string;
@@ -10,7 +10,7 @@ interface NavigationItemComponentProps {
 }
 
 const NavigationItem = (props: NavigationItemComponentProps) => {
-  const defaultClass = 'w-full h-full min-w-[44px] max-w-[44px] min-h-[44px] max-h-[44px] rounded-full overflow-hidden outline-none focus:outline-none focus-within:outline-none cursor-pointer flex items-center justify-center';
+  const defaultClass = 'w-full h-full cursor-pointer min-w-[44px] max-w-[44px] min-h-[44px] max-h-[44px] rounded-full overflow-hidden outline-none focus:outline-none focus-within:outline-none flex items-center justify-center';
   const activeClass = 'bg-[#EEEEEE]';
   const inactiveClass = 'bg-transparent';
   const [isShowTooltip, setIsShowTooltip] = useState<boolean>(false);

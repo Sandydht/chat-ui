@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constants';
-import { PAGE } from '../constants/page.constants';
-import { getItemFromLocalStorage } from '../services/local-storage.services';
+import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constant';
+import { PAGE } from '../constants/page.constant';
+import { getItemFromLocalStorage } from '../services/local-storage.service';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 const axiosInstance = axios.create({

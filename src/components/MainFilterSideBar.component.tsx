@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import CustomSearchInput from "./CustomSearchInput.components";
-import { CHAT_ROOM_TYPE } from "../constants/chat-room-type.constants";
+import CustomSearchInput from "./CustomSearchInput.component";
+import { CHAT_ROOM_TYPE } from "../constants/chat-room-type.constant";
 
 interface MainFilterSideBarComponentProps {
   handleChatRoomFilter: (value: string, chatRoomFilterType: string) => void;

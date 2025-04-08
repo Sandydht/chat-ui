@@ -1,26 +1,30 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from 'react'
 import LoginPageImage from '../assets/images/svg/undraw_online-messaging_gjnh.svg'
 import VisibleIcon from '../assets/images/svg/visibility_24px_outlined.svg'
 import UnvisibleIcon from '../assets/images/svg/visibility_off_24px_outlined.svg'
-import { Link } from "react-router-dom";
-import { PAGE } from "../constants/page.constants";
-import { useAuth } from "../contexts/AuthContext.contexts";
+import { Link, useHistory } from 'react-router-dom'
+import { PAGE } from '../constants/page.constant'
+import { loginAccount } from '../services/authentication.service'
+import { setItemToLocalStorage } from '../services/local-storage.service'
+import { LOCAL_STORAGE_SERVICE } from '../constants/local-storage-service.constant'
+import { useDispatch } from 'react-redux'
+import { showSnackbar } from '../store/snackbarSlice'
+import { SNACKBAR_TYPE } from '../constants/snackbar-type.constant'
 
 interface FormDataSubmit {
-  name: string;
   phone_number: string;
   password: string;
 }
 
-const Register = () => {
+const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataSubmit>({
-    name: '',
     phone_number: '',
     password: ''
   });
-  const auth = useAuth();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const toggleVisibilityPassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -30,16 +34,21 @@ const Register = () => {
     try {
       event.preventDefault();
       setIsLoading(true);
-      const response = await auth.handleRegisterAccount(formData);
+      const response = await loginAccount(formData);
       if (response.status == 'OK' && response.access_token) {
+        setItemToLocalStorage(LOCAL_STORAGE_SERVICE.ACCESS_TOKEN, response.access_token);
         setFormData({
-          name: '',
           phone_number: '',
           password: ''
         });
+        history.push(PAGE.HOME);
       }
     } catch (error) {
-      throw error;
+      dispatch(showSnackbar({
+        show: true,
+        type: SNACKBAR_TYPE.DANGER,
+        message: String(error)
+      }));
     } finally {
       setIsLoading(false);
     }
@@ -47,7 +56,6 @@ const Register = () => {
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -71,18 +79,6 @@ const Register = () => {
           onSubmit={handleSubmit}
         >
           <div className='w-full h-auto flex flex-col items-start justify-start gap-[10px]'>
-            <div className='w-full h-auto flex flex-col items-start justify-start gap-[5px]'>
-              <label htmlFor="name" className='text-left text-[16px] leading-[24px] text-[#000000] font-medium'>Nama <span className='text-[#FF0000]'>*</span></label>
-              <input
-                id='name'
-                name='name'
-                type='text'
-                className='w-full h-auto px-[20px] py-[10px] border-[1px] rounded-[6px] border-[#D9D9D9] text-left text-[#000] text-[16px] leading-[24px] font-medium outline-none focus:outline-none focus-within:outline-none overflow-hidden'
-                placeholder='Contoh: John Doe...'
-                value={formData.name}
-                onChange={handleChangeInput}
-              />
-            </div>
             <div className='w-full h-auto flex flex-col items-start justify-start gap-[5px]'>
               <label htmlFor="phone_number" className='text-left text-[16px] leading-[24px] text-[#000000] font-medium'>Nomor HP <span className='text-[#FF0000]'>*</span></label>
               <input
@@ -129,7 +125,7 @@ const Register = () => {
                 type='submit'
                 className='w-full h-auto rounded-[6px] px-[20px] py-[10px] bg-[#508C9B] text-center text-[16px] leading-[24px] text-[#FFFFFF] font-medium cursor-pointer hover:bg-[#406c7a] outline-none focus:outline-none focus-within:outline-none'
               >
-                Registrasi
+                Masuk
               </button>
             )}
 
@@ -143,8 +139,11 @@ const Register = () => {
               </button>
             )}
             <div className='w-full h-auto flex items-center justify-between gap-[10px]'>
-              <Link to={PAGE.LOGIN} className='text-left text-[16px] leading-[24px] text-[#000000] font-medium cursor-pointer'>
-                Sudah Punya Akun ? Masuk
+              <Link to={PAGE.REGISTER} className='text-left text-[16px] leading-[24px] text-[#000000] font-medium cursor-pointer'>
+                Registrasi Akun
+              </Link>
+              <Link to={PAGE.FORGOT_PASSWORD} className='text-left text-[16px] leading-[24px] text-[#000000] font-medium cursor-pointer'>
+                Lupa Kata Sandi ?
               </Link>
             </div>
           </div>
@@ -154,4 +153,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login

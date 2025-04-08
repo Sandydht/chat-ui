@@ -1,11 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import SearchIcon from '../assets/images/svg/search_24px_outlined.svg';
-import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constants';
-import useDebounce from '../hooks/debounce.hooks';
-import { CONTACT_TYPE } from '../constants/contact-type.constants';
+import { CHAT_ROOM_TYPE } from '../constants/chat-room-type.constant';
+import useDebounce from '../hooks/debounce.hook';
+import { CONTACT_TYPE } from '../constants/contact-type.constant';
 
 interface CustomSearchInputComponentProps {
   filterType?: string;
+  placeholder?: string;
   handleChangeSearchInput: (value: string, chatRoomFilterType: string) => void;
 }
 
@@ -54,7 +55,7 @@ const CustomSearchInput = (props: CustomSearchInputComponentProps) => {
             name='searchInput'
             type='search'
             className='w-full h-auto py-[10px] outline-none text-left text-[14px] leading-[20px] text-[000000] font-medium focus:outline-none focus-within:outline-none'
-            placeholder={renderPlaceholder()}
+            placeholder={props.placeholder || renderPlaceholder()}
             value={searchInputValue}
             onChange={handleChangeInput}
           />
